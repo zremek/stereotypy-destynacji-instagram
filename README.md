@@ -1,0 +1,1 @@
+# stereotypy-destynacji-instagram
