@@ -9,12 +9,15 @@ pst <- read_excel("arkusz analizy.xlsx", sheet = "ZBIORCZAanaliza postów")
 
 pst <- pst[, 1:6]
 
-DataExplorer::create_report(pst)
-# trwają konsultacje z zespołem w sprawie przygotowania danych 
+# DataExplorer::create_report(pst)
+
 
 table1(~ `nazwa użytkownika` + intencja + stereotyp + kraj, data = pst)
-table1(~ intencja + stereotyp | kraj, data = pst) # to jest dobre do tekstu 
+table1(~ intencja + stereotyp | kraj, data = pst, caption = "posty") # to jest dobre do tekstu 
 
-# poprawka jednej nazwy 
+# poprawka nazw
 
-pst[42, 2] <- "podrozovanie"
+pst <- pst %>% rename(username = `nazwa użytkownika`)
+
+pst <- pst %>% 
+  mutate(username = gsub(" \\(.*\\)", "", username))
