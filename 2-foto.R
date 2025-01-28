@@ -36,11 +36,11 @@ joinupstufoto <- left_join(x = ufoto, y = upst, by = join_by(username))
 joinufotoupst <- left_join(x = upst, y = ufoto, by = join_by(username))
 
 
-joinupstufoto %>% 
-  filter(is.na(n.y)) %>% 
-  View()
-
-
-joinufotoupst %>% 
-  filter(is.na(n)) %>% 
-  View()
+# joinupstufoto %>% 
+#   filter(is.na(n.y)) %>% 
+#   View()
+# 
+# 
+# joinufotoupst %>% 
+#   filter(is.na(n)) %>% 
+#   View()
