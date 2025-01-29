@@ -30,10 +30,21 @@ flat_table(en_p, username, country)
 
 #SRQ1
 
-chisq.test(x = table(en_p$stereotype), p = c(1/3, 1/3, 1/3))
+eq_dist_stereo <- c(1/3, 1/3, 1/3)
 
-chisq.test(x = table(en_f$stereotype), p = c(1/3, 1/3, 1/3))
+chisq.test(x = table(en_p$stereotype), p = eq_dist_stereo)
 
+chisq.test(x = table(en_f$stereotype), p = eq_dist_stereo)
+
+viz_srq1 <- left_join(x = en_p %>% count(stereotype), 
+                      y = en_f %>% count(stereotype), 
+                      by = join_by(stereotype)) %>% 
+  rename(posts = n.x, 
+         photos = n.y) %>% 
+  add_column(equal = eq_dist_stereo)
+
+
+viz_srq1 %>% pivot_longer(!stereotype, names_to = "dataset", values_to = "distribution") %>% ggplot(aes(x = dataset, y = distribution, fill = stereotype)) + geom_col(position = "fill") + coord_flip()
 
 # SRQ2
 en_p %>% sjtab(intent, stereotype, fun = "xtab", show.col.prc = TRUE)
@@ -60,3 +71,6 @@ print(chi_test_f)
 # Extract and print the expected frequencies
 chi_test_p$expected
 chi_test_f$expected
+
+
+
