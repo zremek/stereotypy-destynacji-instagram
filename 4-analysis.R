@@ -56,7 +56,7 @@ en_f %>% sjtab(intent, stereotype, fun = "xtab", show.col.prc = TRUE)
 
 stats::fisher.test(x = en_p$intent, y = en_p$stereotype)
 
-stats::fisher.test(x = en_f$intent, y = en_f$stereotype)
+stats::fisher.test(x = en_f$intent, y = en_f$stereotype, workspace = 2e8)
 
 t_int_ster_p <- table(x = en_p$intent, y = en_p$stereotype)
 t_int_ster_f <- table(x = en_f$intent, y = en_f$stereotype)
